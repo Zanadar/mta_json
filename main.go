@@ -1,8 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"encoding/xml"
 	"fmt"
+	"os"
 )
 
 func main() {
@@ -18,6 +20,14 @@ func main() {
 		fmt.Printf("error: %v", err)
 		return
 	}
+
+	output, err := json.Marshal(v)
+
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
+
+	os.Stdout.Write(output)
 
 	fmt.Printf("XMLName: %#v\n", v.XMLName)
 	fmt.Printf("Timestamp: %q\n", v.Timestamp)
